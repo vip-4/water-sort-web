@@ -1,0 +1,32 @@
+# Water Sort
+
+> A relaxing, offline-first color-sorting puzzle game built with Flutter. Pour colored water between tubes until each tube contains a single color. Free, ad-free, and with no analytics or tracking.
+
+Canonical / playable web build: https://water-sort-web.pages.dev/
+Original source: https://github.com/sidhant947/water-sort
+License: GPL-3.0 (the LICENSE file is included with the web build)
+
+## How to play
+
+- Tap a tube to pick up its top colored water segment, then tap another tube to pour.
+- You may pour onto a segment of the same color or into an empty tube.
+- A tube is solved when all segments in it are the same color.
+- Complete every tube to solve the puzzle and advance to the next level.
+
+## Key facts
+
+- Infinite procedurally generated levels with no level cap, no energy system, and no waiting timers.
+- Designed to work completely offline: no network access is required for gameplay.
+- No advertisements, no analytics, no trackers, and no device fingerprints.
+- Progress is stored locally on the player's device.
+- Clean minimalist UI with smooth pouring animations and a relaxing color palette.
+- Multilingual interface (English and German in the upstream project).
+- The original project is published on Google Play and F-Droid under the package `com.sidhant.watersort`.
+
+## Technology
+
+Built with Flutter and Dart, using Riverpod for state management, Hive for local persistence, and Flame for parts of the game rendering. This deployment is a Flutter Web release build compiled to JavaScript with CanvasKit, served as a fully static site on Cloudflare Pages. No backend is required.
+
+## Attribution
+
+Original game and source code by sidhant947, licensed under GPL-3.0. This web deployment is an independent build of that source for browser play.
