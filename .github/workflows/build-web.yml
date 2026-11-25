@@ -1,0 +1,53 @@
+name: Build Water Sort Web
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build-web:
+    name: Build Flutter Web release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout build repo
+        uses: actions/checkout@v4
+
+      - name: Clone Water Sort source
+        run: git clone --depth 1 https://github.com/sidhant947/water-sort.git source
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Add web platform scaffolding
+        working-directory: source
+        run: flutter create --platforms=web --project-name watersort .
+
+      - name: Apply optimized web shell and SEO assets
+        run: |
+          cp web/index.html source/web/index.html
+          cp seo/robots.txt source/web/robots.txt
+          cp seo/sitemap.xml source/web/sitemap.xml
+          cp seo/llms.txt source/web/llms.txt
+
+      - name: Get dependencies
+        working-directory: source
+        run: flutter pub get
+
+      - name: Build web release
+        working-directory: source
+        run: |
+          flutter build web --release --base-href /
+          cp LICENSE build/web/LICENSE
+
+      - name: Upload web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: water-sort-web
+          path: source/build/web
+          retention-days: 7
